@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import api from '../api';
-import InputComponent from '../input/inputComponent';
 import Item from '../item/item';
 import ItemModel from '../item/item.model';
 
 class Cart extends Component {
   state = {
-    items: []
+    items: [],
+    itemToAdd: ''
   }
 
   componentWillUnmount() {
@@ -25,6 +25,16 @@ class Cart extends Component {
     });
   }
 
+  updateItem = event => {
+    this.setState({ itemToAdd: event.target.value }, () => {
+    });
+  }
+
+  createAndAddItem = () => {
+    const item = new ItemModel(this.state.itemToAdd, 10.00, false);
+    this.addItem(item);
+  }
+
   addItem = (item) => {
     api.putItems(item).then(tasksData => {
       console.log('trying to set state with item - ', item)
@@ -39,8 +49,14 @@ class Cart extends Component {
     return (
       <div>
         <h1>cart Items</h1>
+        <form> 
+          <label> 
+            Input Item: 
+            <input value={this.state.itemToAdd} onChange={this.updateItem} type="text" name="name" />
+          </label>
+          <button onClick={this.createAndAddItem} type="submit" name="Create"> Add Item</button>
+        </form>
         <ul>
-          <InputComponent addItem={this.addItem}/>
           <Item item={new ItemModel('Test1', 3.50, false)}/>
         </ul>
       </div>

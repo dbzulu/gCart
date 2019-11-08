@@ -19,11 +19,5 @@ describe('<Item/>', () => {
         testItem.addItem(new ItemModel('Thing2', 14, false)); 
          expect(testItem.itemsArray().length).toBe(1);  
     })
-    test('verify inputComponent is added to cart component', ()=> { 
-        const itemComponent = shallow(<Cart />);         
-
-       expect(itemComponent.find('InputComponent')).toHaveLength(1); 
-    })
-
 });
 
