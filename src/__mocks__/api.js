@@ -19,13 +19,11 @@ export default {
         onSale: false
       }]);
   },
-  postPromise(data) {
+  putPromise(data) {
     return new Promise(resolve => resolve(data));
   },
-  postItems() {
-    return this.postPromise({
-      status: 'OK',
-      code: 200
-    })
+  putItems(item) {
+    console.log('item given was ', item)
+    return this.getPromise({item});
   }
 };

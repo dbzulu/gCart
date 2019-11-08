@@ -25,12 +25,22 @@ class Cart extends Component {
     });
   }
 
+  addItem = (item) => {
+    api.putItems(item).then(tasksData => {
+      console.log('trying to set state with item - ', item)
+      this.setState({
+        items: [...this.state.items, item]
+      });
+    });
+    
+  }
+
   render() {
     return (
       <div>
         <h1>cart Items</h1>
         <ul>
-          <InputComponent/>
+          <InputComponent addItem={this.addItem}/>
           <Item item={new ItemModel('Test1', 3.50, false)}/>
         </ul>
       </div>
